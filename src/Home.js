@@ -13,9 +13,6 @@ class Home extends Component {
 
     render() {
 
-        //const data = this.props.data;
-       // console.log("results:   ", this.props.data);
-
         const columns = [
         {
             Header: "First Name",
