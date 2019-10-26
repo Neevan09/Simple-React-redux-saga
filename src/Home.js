@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-
 import { requestApiData } from "./actions"
+import ReactTable from 'react-table'
+import "react-table/react-table.css"
 
 class Home extends Component {
 
@@ -10,31 +11,53 @@ class Home extends Component {
         this.props.requestApiData();
     }
 
-    person = (user) => (
-        <div>
-            <h1>API DATA</h1>
-            <ul>
-                <li key={user.id}>
-                    <h1>Fetched API DATA</h1>
-                    <h1>First Name: {user.username}</h1> 
-                </li>
-            </ul>
-        </div>
-    );
+    render() {
 
-    render() {        
+        //const data = this.props.data;
+       // console.log("results:   ", this.props.data);
 
-        const { data = [] } = this.props;
-    console.log("results:   "+this.props.data);
-       // debugger; 
-        //debugger;
+        const columns = [
+        {
+            Header: "First Name",
+            accessor: "firstName",
+            style:{
+                textAlign: "left"
+            },
+            width: 150,
+            minWidth: 100,
+            maxWidth: 200
+        },
+        {
+            Header: "Last Name",
+            accessor: "lastName",
+            width: 150,
+            minWidth: 100,
+            maxWidth: 200
+        },
+        {
+            Header: "Company",
+            accessor: "company.name"
+        },
+        {
+            Header: "City",
+            accessor: "address.city"
+        },
+        {
+            Header: "Email",
+            accessor: "email",
+            sortable: false,
+            filterable: false
+        }]
+
         return (
-            <div>
-                <h1>Rendering....</h1>
-                    { 
-                        data.map(this.person)
-                    }
-            </div>
+            <ReactTable
+                columns={columns}
+                data = {this.props.data}
+                filterable
+                defaultPageSize = {1000}
+                showPagination = {false}
+            >
+            </ReactTable>
         );
     }
 }
