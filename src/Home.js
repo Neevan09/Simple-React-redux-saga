@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { requestApiData } from "./actions"
-import ReactTable from 'react-table'
-import "react-table/react-table.css"
+import User from './User/User'
 
 class Home extends Component {
 
@@ -12,49 +11,8 @@ class Home extends Component {
     }
 
     render() {
-
-        const columns = [
-        {
-            Header: "First Name",
-            accessor: "firstName",
-            style:{
-                textAlign: "left"
-            },
-            width: 150,
-            minWidth: 100,
-            maxWidth: 200
-        },
-        {
-            Header: "Last Name",
-            accessor: "lastName",
-            width: 150,
-            minWidth: 100,
-            maxWidth: 200
-        },
-        {
-            Header: "Company",
-            accessor: "company.name"
-        },
-        {
-            Header: "City",
-            accessor: "address.city"
-        },
-        {
-            Header: "Email",
-            accessor: "email",
-            sortable: false,
-            filterable: false
-        }]
-
         return (
-            <ReactTable
-                columns={columns}
-                data = {this.props.data}
-                filterable
-                defaultPageSize = {1000}
-                showPagination = {false}
-            >
-            </ReactTable>
+            <User data={this.props.data} />
         );
     }
 }
